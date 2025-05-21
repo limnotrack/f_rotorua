@@ -976,11 +976,8 @@ chla_corr |>
   plot_sensor(var_ref_id = "f_chl_d100", variable_ref =  variable_ref, 
               sensor_calibrations = sensor_calibrations, 
               sensor_reference = sensor_reference,
-              sensor_scaling = sensor_scaling, clip_ylim = FALSE, colour = "qc_code")
-
-# viz_data(data = chla_corr, site_events = site_events, variable = "var_ref_id",
-#          value = "qc_value")
-
+              sensor_scaling = sensor_scaling, clip_ylim = FALSE,
+              colour = "qc_code")
 ```
 
 
