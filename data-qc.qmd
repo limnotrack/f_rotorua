@@ -16,7 +16,9 @@ tbl-cap-location: top
 
 ```{r}
 #| label: setup
-#| eval: false
+#| eval: true
+#| echo: false
+#| include: false
 
 unlink("data-raw", force = TRUE, recursive = TRUE)
 
@@ -67,7 +69,7 @@ R using the `piggyback` package. The data are stored in the `data-raw` folder.
 #| warning: false
 #| cache: true
 
-download <- FALSE
+download <- TRUE
 
 if (download) {
   dir.create("data-raw", showWarnings = FALSE)
@@ -112,7 +114,7 @@ the site location, device IDs, variable names, and sensor calibration data.
 #| cache: true
 
 site_sel <- "f_Rotorua"
-site <- read_csv("data-raw/site.csv", col_types = cols())
+site <- read_csv("data-raw/sites.csv", col_types = cols())
 site_events <- read_csv("data-raw/site_events.csv", col_types = cols())
 site_devices <- read_csv("data-raw/site_devices.csv", col_types = cols())
 
