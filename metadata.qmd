@@ -13,9 +13,9 @@ format:
       number_sections: true
 ---
 
-The metadata for the Rotoehu project is within the `rotoehu_data_qc.zip` folder. This folder contains the metadata for the project, including the device position, device variable, quality control filters, sensor calibrations, sensor reference, sensor scaling, site devices, site events, sites and variables.
+The metadata for the Rotorua project is within the `rotorua_data_qc.zip` folder. This folder contains the metadata for the project, including the device position, device variable, quality control filters, sensor calibrations, sensor reference, sensor scaling, site devices, site events, sites and variables.
 
-In this document, we will describe the contents of each file in the `rotoehu_data_qc.zip` folder. The files are in CSV format.
+In this document, we will describe the contents of each file in the `rotorua_data_qc.zip` folder. The files are in CSV format.
 
 ## Load libraries {.unnumbered}
 
@@ -41,15 +41,15 @@ withr::local_timezone("Etc/GMT-12")
 #| cache: true
 #| warning: false
 piggyback::pb_download(
-  file = "rotoehu_data_qc.zip",
+  file = "rotorua_data_qc.zip",
   dest = ".",
-  repo = "limnotrack/f_rotoehu",
+  repo = "limnotrack/f_rotorua",
   tag = "v0.0.1"
 )
 
 # Unzip the file
-unzip("rotoehu_data_qc.zip")
-list.files("rotoehu_data_qc", recursive = TRUE)
+unzip("rotorua_data_qc.zip")
+list.files("rotorua_data_qc", recursive = TRUE)
 
 ```
 
@@ -59,7 +59,7 @@ list.files("rotoehu_data_qc", recursive = TRUE)
 #| label: files
 #| echo: false
 
-files <- list.files("rotoehu_data_qc", recursive = TRUE)
+files <- list.files("rotorua_data_qc", recursive = TRUE)
 data.frame(
   File = files,
   Description = NA
@@ -70,7 +70,7 @@ data.frame(
       File == "device_variable.csv" ~ "Mapping of variables onto devices",
       File == "qc_filters.csv" ~ "Quality control filters",
       File == "sensor_calibrations.csv" ~ "Sensor calibrations",
-      File == "rotoehu_qc.csv" ~ "Quality controlled data",
+      File == "rotorua_qc.csv" ~ "Quality controlled data",
       File == "sensor_reference.csv" ~ "Sensor reference measurements",
       File == "sensor_scaling.csv" ~ "Sensor scaling relationships",
       File == "site_devices.csv" ~ "Mapping of devices to sites",
@@ -102,7 +102,7 @@ The device position is stored in a CSV file. The file contains the following col
 #| label: device-position
 #| results: hide
 
-device_position <- read_csv("rotoehu_data_qc/device_position.csv", col_types = cols())
+device_position <- read_csv("rotorua_data_qc/device_position.csv", col_types = cols())
 device_position
 
 ```
@@ -136,7 +136,7 @@ The device variable is stored in a CSV file. The file contains the following col
 #| label: device-variable
 #| results: hide
 
-device_variable <- read_csv("rotoehu_data_qc/device_variable.csv", col_types = cols())
+device_variable <- read_csv("rotorua_data_qc/device_variable.csv", col_types = cols())
 device_variable
 
 ```
@@ -179,7 +179,7 @@ The quality control filters are stored in a CSV file. The file contains the foll
 #| label: qc-filters
 #| results: hide
 
-qc_filters <- read_csv("rotoehu_data_qc/qc_filters.csv", col_types = cols())
+qc_filters <- read_csv("rotorua_data_qc/qc_filters.csv", col_types = cols())
 
 qc_filters 
 
@@ -205,7 +205,7 @@ qc_filters |>
 
 ## Quality controlled data
 
-This is the finished quality controlled data. There is a summary of this data on the [Quality control page](rotoehu-qc-summary.html).
+This is the finished quality controlled data. There is a summary of this data on the [Quality control page](rotorua-qc-summary.html).
 
 ## Sensor calibrations
 
@@ -215,7 +215,7 @@ The sensor calibrations are stored in a CSV file. The file contains the followin
 #| label: sensor-calibrations
 #| results: hide
 
-sensor_calibrations <- read_csv("rotoehu_data_qc/sensor_calibrations.csv", col_types = cols())
+sensor_calibrations <- read_csv("rotorua_data_qc/sensor_calibrations.csv", col_types = cols())
 
 sensor_calibrations
 
@@ -264,7 +264,7 @@ The sensor reference is stored in a CSV file. The file contains the following co
 #| label: sensor-reference
 #| results: hide
 
-sensor_reference <- read_csv("rotoehu_data_qc/sensor_reference.csv", col_types = cols())
+sensor_reference <- read_csv("rotorua_data_qc/sensor_reference.csv", col_types = cols())
 
 sensor_reference
 
@@ -310,7 +310,7 @@ The sensor scaling is stored in a CSV file. The file contains the following colu
 #| label: sensor-scaling
 #| results: hide
 
-sensor_scaling <- read_csv("rotoehu_data_qc/sensor_scaling.csv", col_types = cols())
+sensor_scaling <- read_csv("rotorua_data_qc/sensor_scaling.csv", col_types = cols())
 
 sensor_scaling
 
@@ -353,7 +353,7 @@ The site devices are stored in a CSV file. The file contains the following colum
 #| label: site-devices
 #| results: hide
 
-site_devices <- read_csv("rotoehu_data_qc/site_devices.csv", col_types = cols())
+site_devices <- read_csv("rotorua_data_qc/site_devices.csv", col_types = cols())
 
 site_devices
 
@@ -396,7 +396,7 @@ The site events are stored in a CSV file. The file contains the following column
 #| label: site-events
 #| results: hide
 
-site_events <- read_csv("rotoehu_data_qc/site_events.csv", col_types = cols())
+site_events <- read_csv("rotorua_data_qc/site_events.csv", col_types = cols())
 
 site_events
 
@@ -441,7 +441,7 @@ The sites are stored in a CSV file. The file contains the following columns:
 #| label: sites
 #| results: hide
 
-sites <- read_csv("rotoehu_data_qc/sites.csv", col_types = cols())
+sites <- read_csv("rotorua_data_qc/sites.csv", col_types = cols())
 
 sites
 
@@ -477,7 +477,7 @@ The variables are stored in a CSV file. The file contains the following columns:
 #| label: variables
 #| results: hide
 
-variables <- read_csv("rotoehu_data_qc/variables.csv", col_types = cols())
+variables <- read_csv("rotorua_data_qc/variables.csv", col_types = cols())
 
 variables
 ```
