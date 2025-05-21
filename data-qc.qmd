@@ -960,10 +960,12 @@ raw_v <- raw_chl |>
 
 # plot_raw_qc(data = raw_v, variable_ref = variable_ref)
 
-chl_adj <- read_csv("qc_adj_f_chl_d100_raw_V.csv", col_types = cols()) 
+# chl_adj <- read_csv("qc_adj_f_chl_d100_raw_V.csv", col_types = cols()) 
+# qc_update_df <- bind_rows(qc_update_df, chl_adj)
+# write_csv(qc_update_df, "qc_update_df.csv")
 
 chla_corr <- raw_v |>
-  update_qc_code_vectorized(qc_update_df = chl_adj) |>
+  update_qc_code_vectorized(qc_update_df = qc_update_df) |>
   mutate(qc_value = qc_value * 10,
          var_ref_id = "f_chl_d100",
          var_abbr = "f_chl",
