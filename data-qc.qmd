@@ -420,13 +420,6 @@ sensor_map[!sensor_map$var_ref_id %in% names(raw), ]
 names(raw)[!names(raw) %in% sensor_map$var_ref_id]
 ```
 
-```{r}
-# ggplot() +
-#   geom_scattermore(data = raw, aes(x = datetime, y = f_chl_d100)) +
-#   coord_cartesian(ylim = c(0, 500)) +
-#   theme_bw()
-```
-
 
 Convert wide dataframe to standardised long format.
 
@@ -457,15 +450,6 @@ raw_long_device <- sensor_map |>
 head(raw_long_device)
 
 ```
-
-```{r}
-dups <- raw_long_device |> 
-  group_by(datetime, var_ref_id) |> 
-  summarise(n = n()) |> 
-  filter(n > 1)
-dups
-```
-
 
 
 ```{r}
@@ -827,11 +811,16 @@ raw_long_device_filt <- apply_filters(raw_long_device2, filters = qc_filters)
 plot_flag_ts(raw_long_device_filt)
 ```
 ```{r}
-dups <- raw_long_device_filt |> 
-  group_by(var_ref_id, datetime) |> 
-  summarise(n = n()) |> 
-  filter(n > 1)
-dups 
+#| label: check-for-duplicates
+#| include: false
+#| echo: false
+#| eval: false
+
+# dups <- raw_long_device_filt |> 
+#   group_by(var_ref_id, datetime) |> 
+#   summarise(n = n()) |> 
+#   filter(n > 1)
+# dups 
 ```
 
 
@@ -1122,6 +1111,10 @@ write_csv(qc_update_df, "qc_update_df.csv")
 
 
 ```{r}
+#| label: plot-raw-phyco
+#| include: false
+#| echo: false
+#| eval: false
 
 # qc_update_df <- qc_update_df |> 
 #   mutate(
@@ -1158,6 +1151,7 @@ phyc_corr |>
 #| label: fig-compare-sensor-references
 #| include: false
 #| echo: false
+#| eval: false
 
 sensor_refs <- sensor_reference |> 
   filter(device_id %in% phyc_corr$device_id)
