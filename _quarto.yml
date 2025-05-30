@@ -1,5 +1,10 @@
 project:
   type: website
+  render:
+    - index.qmd
+    - data-qc.qmd
+    - rotorua-qc-summary.qmd
+    - metadata.qmd
 
 website:
   title: "Lake Rotorua Data Product"
