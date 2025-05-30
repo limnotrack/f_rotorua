@@ -3320,3 +3320,85 @@ plot_raw_qc <- function(data, out_dir = "qc_plots", days_offset = 184,
   
 }
 
+generate_readme <- function(metadata_path = "data/metadata/dataspice.json",
+                            attributes_path = "data/metadata/attributes.csv",
+                            access_path = "data/metadata/access.csv",
+                            files_path,
+                            output_path,
+                            version = "v0.0.1",
+                            include_description = TRUE
+) {
+  
+  meta <- metadata_path |> jsonlite::fromJSON()
+  attributes <- attributes_path |> readr::read_csv(show_col_types = FALSE)
+  access <- access_path |> readr::read_csv(show_col_types = FALSE)
+  
+  variable_summary <- attributes |>
+    dplyr::mutate(desc = paste0(variableName , ": ", description, " [file: ", fileName, ", units: ", unitText, "]")) |>
+    dplyr::pull(desc)
+  
+  variable_summary <- paste("-", variable_summary, collapse = "\n")
+  
+  authors <- paste0(meta$creator$name, collapse = ", ")
+  creator <- meta$creator$name[1]
+  contact <- meta$creator$email[1]
+  license <- meta$license[1]
+  
+  description <- meta$description
+  
+  files <- files_path |>
+    list.files(full.names = TRUE) |>
+    basename()
+  files <- paste0("- ", files) |>
+    paste(collapse = "\n")
+  
+  readme_text <- glue::glue(
+    "
+DATA PRODUCT README
+===================
+
+Title: {meta$name}
+Version: {version}
+Date Created: {Sys.Date()}
+Authors: {authors}
+License: {license}
+
+---
+
+DESCRIPTION
+-----------
+{description}
+---
+
+FILES INCLUDED
+--------------
+{files}
+- README.txt
+
+---
+
+VARIABLES
+---------
+{variable_summary}
+
+---
+
+USAGE
+-----
+Cite the dataset as:
+[Add citation here]
+
+License:
+This dataset is shared under a {license} license. See `data/metadata/access.csv` for details.
+
+Contact:
+{creator} – {contact}
+"
+  )
+  # cat(readme_text)
+  
+  
+  writeLines(readme_text, file.path(output_path, "README.txt"))
+}
+
+
