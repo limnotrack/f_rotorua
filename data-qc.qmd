@@ -2157,7 +2157,7 @@ the quality control.
 #| label: write-data-to-zip-folder
 #| echo: false
 #| include: false
-#| eval: false
+#| eval: true
 
 # Create directory for rotorua data
 path <- "rotorua_data_qc"
@@ -2247,7 +2247,7 @@ zip(zipfile = "rotorua_data_qc.zip", files = path)
 #| label: upload-data-github
 #| include: false
 #| echo: false
-#| eval: false
+#| eval: true
 
 piggyback::pb_upload(
   "rotorua_data_qc.zip",
